@@ -76,8 +76,8 @@ add({
 	hooks = { post_checkout = function() vim.cmd('TSUpdate') end },
 })
 require('nvim-treesitter.configs').setup({
-	ensure_installed = { 'lua', 'vimdoc' },
-	highlight = { enable = 'lua' },
+	ensure_installed = { 'lua', 'vimdoc', 'markdown', 'markdown_inline', 'yaml', 'toml', 'json' },
+	highlight = { enable = true },
 })
 
 -- LSP code actions
