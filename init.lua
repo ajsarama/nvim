@@ -34,6 +34,16 @@ end
 -- Set up 'mini.deps' (customize to your liking)
 require('mini.deps').setup({ path = { package = path_package } })
 
+-- Auto format on save
+vim.api.nvim_create_autocmd("BufWritePre", {
+	callback = function(args)
+		local clients = vim.lsp.get_clients({ bufnr = args.buf })
+		if next(clients) ~= nil then
+			vim.lsp.buf.format({ async = false })
+		end
+	end,
+})
+
 local add = MiniDeps.add
 
 -- Color scheme
@@ -72,9 +82,9 @@ require('nvim-treesitter.configs').setup({
 
 -- LSP code actions
 add({
-    source = "rachartier/tiny-code-action.nvim",
-    depends = {
-        "nvim-lua/plenary.nvim",
+	source = "rachartier/tiny-code-action.nvim",
+	depends = {
+		"nvim-lua/plenary.nvim",
 	}
 })
 local code_action = require("tiny-code-action")
